@@ -16,21 +16,21 @@
 using namespace std;
 using ll = long long;
 
-ll n, m;
-vector<ll> v;
-int Max = 0;
-ll lo = 1, hi = 0;
+ll n, k;
+ll arr[1000001] = {};
 ll ret = 0;
 
+ll lo, hi;
 bool check(ll mid)
 {
 	ll cnt = 0;
+
 	for (int i = 0; i < n; i++)
 	{
-		cnt +=max(ll(0), v[i] - mid);
+		cnt += max(ll(0), arr[i] - mid);
 	}
 
-	return cnt >= m;
+	return cnt >= k;
 }
 
 int main()
@@ -39,20 +39,19 @@ int main()
 	std::cin.tie(0);
 	std::cout.tie(0);
 
-	cin >> n >> m;
+	cin >> n >> k;
 	for (int i = 0; i < n; i++)
 	{
-		int temp;
-		cin >> temp;
-		Max = max(Max, temp);
-		v.push_back(temp);
+		cin >> arr[i];
+		hi = max(arr[i], hi);
 	}
 
-	hi = Max;
+	lo = 1;
 
-	while (lo<=hi)
+	while (lo <= hi)
 	{
 		ll mid = (lo + hi) / 2;
+
 		if (check(mid))
 		{
 			lo = mid + 1;
